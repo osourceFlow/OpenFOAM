@@ -13,21 +13,21 @@ namespace Foam
         RAStransportModelIncompressibleTurbulenceModel;
 }
 
-#include "kOmegaSSTSASnew.H"
-makeTemplatedTurbulenceModel
-(
-    transportModelIncompressibleTurbulenceModel,
-    RAS,
-    kOmegaSSTSASnew
-);
+//#include "kOmegaSSTSASnew.H"
+//makeTemplatedTurbulenceModel
+//(
+//    transportModelIncompressibleTurbulenceModel,
+//    RAS,
+//    kOmegaSSTSASnew
+//);
 
-#include "mykOmega.H"
-makeTemplatedTurbulenceModel
-(
-    transportModelIncompressibleTurbulenceModel,
-    RAS,
-    mykOmega
-);
+//#include "mykOmega.H"
+//makeTemplatedTurbulenceModel
+//(
+//    transportModelIncompressibleTurbulenceModel,
+//    RAS,
+//    mykOmega
+//);
 
 #include "mykOmegaSST.H"
 makeTemplatedTurbulenceModel
