@@ -105,11 +105,11 @@ void Foam::functionObjects::wallHeatFluxHTC::calcHeatFlux
         
     // Prandtl number, Turbulent Prandtl number, Heat capacity,
     // Fluid density, Thermal conductivity, and Temperature.
-    dimensionedScalar Pr(transportProperties.lookup("Pr"));
-    dimensionedScalar Prt(transportProperties.lookup("Prt"));
-    dimensionedScalar Cp(transportProperties.lookup("Cp"));
-    dimensionedScalar rho(transportProperties.lookup("rho"));
-    volScalarField  alphaEff = (model.nu()/Pr+model.nut()/Prt)*Cp*rho;
+    const dimensionedScalar Pr(transportProperties.lookup("Pr"));
+    const dimensionedScalar Prt(transportProperties.lookup("Prt"));
+    const dimensionedScalar Cp(transportProperties.lookup("Cp"));
+    const dimensionedScalar rho(transportProperties.lookup("rho"));
+    const volScalarField  alphaEff = (model.nu()/Pr+model.nut()/Prt)*Cp*rho;
     const volScalarField& T = mesh_.lookupObject<volScalarField>("T");   
 
     // Calculate the heat flux

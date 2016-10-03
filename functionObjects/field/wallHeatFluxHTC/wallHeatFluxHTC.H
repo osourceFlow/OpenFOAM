@@ -103,10 +103,10 @@ protected:
         //- Optional list of patches to process
         labelHashSet patchSet_;
 
-        //- Calculate heat transfer coefficient, htc (defautl=true)
+        //- Calculate heat transfer coefficient, htc (default=true)
         bool calcHtc_;
         
-        // Reference value for heat transfer coefficient (h = q / (Twall - Tref))
+        // Reference value for heat transfer coefficient (h = q''/(Twall-Tref))
         dimensionedScalar Tref_;
 
 
@@ -130,7 +130,6 @@ protected:
             volScalarField& wallHeatFlux,
             volScalarField& htc            
         );
-
 
         //- Calculate the radiation heat-flux
         void calcRadiationHeatFlux
