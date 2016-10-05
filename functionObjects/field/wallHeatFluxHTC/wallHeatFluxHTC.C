@@ -46,12 +46,16 @@ namespace functionObjects
 void Foam::functionObjects::wallHeatFluxHTC::writeFileHeader(const label i)
 {
     // Add headers to output data
-    writeHeader(file(), "Wall heat-flux");
+    writeHeader(file(), "Wall heat-flux/htc");
     writeCommented(file(), "Time");
     writeTabbed(file(), "patch");
-    writeTabbed(file(), "min");
-    writeTabbed(file(), "max");
-    writeTabbed(file(), "integral");
+    writeTabbed(file(), "q min");
+    writeTabbed(file(), "q max");
+    writeTabbed(file(), "q mean");
+    writeTabbed(file(), "htc min");
+    writeTabbed(file(), "htc max");
+    writeTabbed(file(), "htc mean");
+    
     file() << endl;
 }
 
@@ -417,15 +421,15 @@ bool Foam::functionObjects::wallHeatFluxHTC::write()
                 << token::TAB << pp.name()
                 << token::TAB << minHfp
                 << token::TAB << maxHfp
-                << token::TAB << meanHfp
-                << endl;
+                << token::TAB << meanHfp;
             if (calcHtc_) 
             {     
                 file()
                     << token::TAB << minHtcp
                     << token::TAB << maxHtcp
-                    << endl;
+                    << token::TAB << meanHtcp;
             }
+            file() << endl;
         }
 
         Log << "    q'' (" << pp.name() << ")  = "
