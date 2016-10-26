@@ -436,10 +436,11 @@ bool Foam::functionObjects::wallHeatFluxHTC::write()
             << minHfp << ", " << maxHfp << ", " << meanHfp << endl;
         if (calcHtc_) 
         {     
-            Log << "    htc ( " << pp.name() << ") = "
+            Log << "    htc (" << pp.name() << ") = "
                 << minHtcp << ", " << maxHtcp  << ", " << meanHtcp 
                 << endl;
         }
+        Log << endl;
     }
 
     return true;
