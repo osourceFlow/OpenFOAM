@@ -1,0 +1,47 @@
+// Auto generated with dict2foam
+/*--------------------------------*- C++ -*----------------------------------*| =========                 |                                                |
+| \      /  F ield         | OpenFOAM GUI Project: creativeFields           |
+|  \    /   O peration     | Version:  0.8.9.0                                  |
+|   \  /    A nd           | Web: www.c-fields.com                                       |
+|    \/     M anipulation  |                                                |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    location    "system";
+    version     2;
+    class       dictionary;
+    object      controlDict;
+    format      ascii;
+}
+
+
+application          rhoSimpleFoam;
+writeFrequency       1000;
+timePrecision        6;
+runTimeModifiable    true;
+writeControl         timeStep;
+deltaT               1;
+writeFormat          binary;
+startFrom            latestTime;
+startTime            0;
+stopAt               endTime;
+endTime              10000;
+purgeWrite           0;
+
+
+functions
+{
+    heatTransferCoefficient
+    {
+        type            wallHeatFluxHTC;
+        libs            ("mylibfieldFunctionObjects.so");
+        patches         ("heatedWall");
+        htc             true;
+        Tref            300.15;
+        writeControl    timeStep;
+        timeInterval    1;
+        log             yes;
+    }
+}
+// ************************************************************************* //

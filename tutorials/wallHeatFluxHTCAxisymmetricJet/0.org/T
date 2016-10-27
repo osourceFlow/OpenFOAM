@@ -1,0 +1,47 @@
+// Auto generated with dict2foam
+/*--------------------------------*- C++ -*----------------------------------*| =========                 |                                                |
+| \      /  F ield         | OpenFOAM GUI Project: creativeFields           |
+|  \    /   O peration     | Version:  0.8.9.0                                  |
+|   \  /    A nd           | Web: www.c-fields.com                                       |
+|    \/     M anipulation  |                                                |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    location    "0";
+    version     2;
+    class       volScalarField;
+    object      T;
+    format      ascii;
+}
+
+internalField    uniform 300.15;
+dimensions       [ 0 0 0 1 0 0 0 ];
+
+boundaryField
+{
+    inlet
+    {
+        type     totalTemperature;
+        gamma    1.4;
+        T0       $internalField;
+        value    $internalField;
+    }
+
+    atmosphere
+    {
+        type          inletOutlet;
+        value         $internalField;;
+        inletValue    $internalField;;
+    }
+    
+    heatedWall
+    {
+        type            fixedValue;
+        value           uniform 373.15;
+    }
+
+    #includeEtc "caseDicts/setConstraintTypes"
+}
+
+// ************************************************************************* //

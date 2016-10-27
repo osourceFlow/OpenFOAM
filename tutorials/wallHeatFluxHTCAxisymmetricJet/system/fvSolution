@@ -1,0 +1,81 @@
+// Auto generated with dict2foam
+/*--------------------------------*- C++ -*----------------------------------*| =========                 |                                                |
+| \      /  F ield         | OpenFOAM GUI Project: creativeFields           |
+|  \    /   O peration     | Version:  0.8.9.0                                  |
+|   \  /    A nd           | Web: www.c-fields.com                                       |
+|    \/     M anipulation  |                                                |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    location    "system";
+    version     2;
+    class       dictionary;
+    object      fvSolution;
+    format      ascii;
+}
+
+
+SIMPLE
+{
+    transonic                   no;
+    consistent                  yes;
+    residualControl
+    {
+        p                           1e-07;
+        U                           1;
+        "(k|omega|epsilon|f|v2)"    1e-07;
+        "(e|h)"                     1e-07;
+    }
+    rhoMin                      rhoMin [1 -3 0 0 0 0 0 ] 0.1;
+    nNonOrthogonalCorrectors    0;
+    rhoMax                      rhoMax [1 -3 0 0 0 0 0 ] 3;
+}
+
+
+relaxationFactors
+{
+    fields
+    {
+        p      0.1;
+        rho    0.01;
+    }
+    equations
+    {
+        "(k|epsilon|omega|f|v2)"    0.5;
+        U                           0.5;
+        "(e|h)"                     0.1;
+    }
+}
+
+
+solvers
+{
+    "(rho).*"
+    {
+        solver    diagonal;
+    }
+    "(p).*"
+    {
+        relTol                   0.01;
+        smoother                 GaussSeidel;
+        agglomerator             faceAreaPair;
+        solver                   GAMG;
+        nCellsInCoarsestLevel    20;
+        mergeLevels              1;
+        cacheAgglomeration       true;
+        tolerance                1e-08;
+        minIter                  1;
+    }
+    "(T|h|e|omega|k|U|f|v2).*"
+    {
+        relTol       0.1;
+        minIter      1;
+        smoother     GaussSeidel;
+        tolerance    1e-06;
+        solver       smoothSolver;
+    }
+}
+
+
+// ************************************************************************* //

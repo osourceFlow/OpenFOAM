@@ -1,0 +1,31 @@
+Overview
+========
++ Template case for wallHeatFluxHTC function object
++ Modified from etc/templates/axisymmetricJet
++ The main purpose of this template is to demonstrate heat transfer coefficient 
+  calculation using wallHeatFluxHTC function object
++ Note that the mesh is of low quality and the result is inaccurate
+
+wallHeatFluxHTC
+=======
++ is called from controlDict as 
+
+    functions
+    {
+        heatTransferCoefficient
+        {
+            type            wallHeatFluxHTC;
+            libs            ("mylibfieldFunctionObjects.so");
+            patches         ("heatedWall");
+            htc             true;
+            Tref            300.15;
+            writeControl    timeStep;
+            timeInterval    1;
+            log             yes;
+        }
+    }
+
++ saves field htc and wallHeatFlux in time folders
+
+Antti Mikkonen
+a.mikkonen@iki.fi

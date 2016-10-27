@@ -1,0 +1,52 @@
+// Auto generated with dict2foam
+/*--------------------------------*- C++ -*----------------------------------*| =========                 |                                                |
+| \      /  F ield         | OpenFOAM GUI Project: creativeFields           |
+|  \    /   O peration     | Version:  0.8.9.0                                  |
+|   \  /    A nd           | Web: www.c-fields.com                                       |
+|    \/     M anipulation  |                                                |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    location    "constant";
+    version     2;
+    class       dictionary;
+    object      thermophysicalProperties;
+    format      ascii;
+}
+
+thermoType
+{
+    mixture            pureMixture;
+    specie             specie;
+    equationOfState    perfectGas;
+    energy             sensibleEnthalpy;
+    thermo             hConst;
+    type               hePsiThermo;
+    transport          sutherland;
+}
+
+materialName    air;
+
+mixture
+{
+    thermodynamics
+    {
+        Cp    1007;
+        Hf    0;
+    }
+    specie
+    {
+        nMoles       1;
+        molWeight    28.9;
+    }
+    transport
+    {
+        Pr    0.7;
+        As    1.458e-06;
+        Ts    110.4;
+    }
+}
+
+
+// ************************************************************************* //
