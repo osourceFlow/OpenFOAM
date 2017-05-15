@@ -1,4 +1,0 @@
-chtMultiRegionSimpleFoamVH.C
-
-EXE = $(FOAM_USER_APPBIN)/chtMultiRegionSimpleFoamVH
-
