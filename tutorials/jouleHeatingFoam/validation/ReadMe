@@ -1,0 +1,31 @@
+Validation case for jouleHeatingFoam
+Antti Mikkonen, a.mikkonen@iki.fi, 2017
+
+For a constant cross-section resistive material
+(https://en.wikipedia.org/wiki/Electrical_resistivity_and_conductivity)
+    R = rho * l / A, 
+
+In our test case
+    A = 1mm x 1mm = 1e-6 m^2
+    l = 1m
+    rho = 1, rho0=1 and alpha = 0
+    V = 1 V
+    
+From the correlation        
+    R = rho * l / A = 1e6 ohm
+For total current 
+    I = V / R = 1e-6 A
+For Joule heating the analytical solution is
+    P = V * I = 1e-6 W
+    
+CFD solution 
+    blockMesh
+    jouleHeatingFoam
+gives
+    Info:
+    Current out - in    = -5.38326e-15 A
+    Total current       = 1e-06 A
+    Total Joule heating = 1e-06 W
+    End
+
+

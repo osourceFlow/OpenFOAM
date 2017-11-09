@@ -1,0 +1,10 @@
+Example case for jouleHeatingFoam
+Antti Mikkonen, a.mikkonen@iki.fi, 2017
+
+A steinless stell plate with dimensions 150x287x0.2mm^3 is heated electrically
+with 1V voltage. The plate has a non-uniform temperature field (setFields) and 
+therefore non-uniform resistivity. The goal is to solve the local Joule heating 
+in the plate. For more details see the dissertation by the author 
+(not yet published).
+
+
