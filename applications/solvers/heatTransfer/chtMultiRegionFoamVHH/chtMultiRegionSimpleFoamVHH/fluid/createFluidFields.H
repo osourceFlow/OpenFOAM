@@ -15,6 +15,9 @@ List<scalar> initialMassFluid(fluidRegions.size());
 List<label> pRefCellFluid(fluidRegions.size(), 0);
 List<scalar> pRefValueFluid(fluidRegions.size(), 0.0);
 List<bool> frozenFlowFluid(fluidRegions.size(), false);
+List<bool> residualReachedFluid(fluidRegions.size(), true);
+List<bool> residualControlUsedFluid(fluidRegions.size(), false);
+List<bool> firstIterationFluid(fluidRegions.size(), true);
 
 PtrList<dimensionedScalar> rhoMax(fluidRegions.size());
 PtrList<dimensionedScalar> rhoMin(fluidRegions.size());
@@ -258,4 +261,17 @@ forAll(fluidRegions, i)
     );
 
     turbulence[i].validate();
+
+    if (simpleDict.isDict("residualControl"))
+    {
+
+        Info<< "    Reading residual controls\n" << endl;
+
+        bool& residualControlUsed = residualControlUsedFluid[i];
+        bool& resReachedFluid = residualReachedFluid[i];
+        bool& firstIteration = firstIterationFluid[i];
+        const fvMesh& mesh = fluidRegions[i];
+
+        #include "readFluidMultiRegionResidualControls.H"
+    }
 }

@@ -34,8 +34,9 @@ Description
 \*---------------------------------------------------------------------------*/
 
 #include "fvCFD.H"
-#include "rhoThermo.H"
 #include "turbulentFluidThermoModel.H"
+#include "rhoReactionThermo.H"
+#include "CombustionModel.H"
 #include "fixedGradientFvPatchFields.H"
 #include "regionProperties.H"
 #include "compressibleCourantNo.H"
@@ -92,7 +93,7 @@ int main(int argc, char *argv[])
         // --- PIMPLE loop
         for (int oCorr=0; oCorr<nOuterCorr; oCorr++)
         {
-            Info<< "Pimple iteration " << oCorr << "\n";
+            Info<< nl << "Pimple iteration " << oCorr;
 
             if (oCorr == nOuterCorr-1 || allRegionsConverged)
             {

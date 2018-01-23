@@ -21,7 +21,7 @@
 
     fvOptions.constrain(EEqn);
 
-    EEqn.solve();
+    solvPerfh = EEqn.solve();
 
     fvOptions.correct(he);
 

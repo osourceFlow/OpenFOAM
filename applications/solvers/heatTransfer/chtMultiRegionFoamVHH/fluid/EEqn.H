@@ -15,11 +15,12 @@
             )
           : -dpdt
         )
-      - fvm::laplacian(turb.alphaEff(), he)
+      - fvm::laplacian(turbulence.alphaEff(), he)
      ==
         rho*(U&g)
-     + (turb.devRhoReff() && fvc::grad(U)) //viscous dissipation
+      + (turbulence.devRhoReff() && fvc::grad(U)) //viscous dissipation
       + rad.Sh(thermo, he)
+      + Qdot
       + fvOptions(rho, he)
     );
 
@@ -27,7 +28,7 @@
 
     fvOptions.constrain(EEqn);
 
-    solvPerfE = EEqn.solve(mesh.solver(he.select(finalIter)));
+    solvPerfhe = EEqn.solve(mesh.solver(he.select(finalIter)));
 
     fvOptions.correct(he);
 
