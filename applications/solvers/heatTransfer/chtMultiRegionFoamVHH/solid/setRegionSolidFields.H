@@ -36,3 +36,13 @@ const volScalarField& fHS = fieldSolidHS[i];
 bool& resReachedSolid = residualReachedSolid[i];
 bool& residualControlUsed = residualControlUsedSolid[i];
 bool& firstIteration = firstIterationSolid[i];
+
+const scalar& resRho1 = resistivityRho1[i];
+const scalar& resRho0 = resistivityRho0[i];
+const scalar& resTref = resistivityTref[i];
+
+// Temperature is multiplied by 1.0 1/K to make volScalarfield Tm unitless
+const volScalarField Tm = thermo.T()* dimensionedScalar("Temp", dimless/dimTemperature, scalar(1.0)) ;
+
+volScalarField& corrFHS = corrFieldSolidHS[i];
+corrFHS = (resRho1 * Tm  + resRho0)/(resRho1 * resTref + resRho0) * fHS;

@@ -4,8 +4,12 @@ PtrList<solidThermo> thermos(solidRegions.size());
 PtrList<radiation::radiationModel> radiations(solidRegions.size());
 PtrList<fv::options> solidHeatSources(solidRegions.size());
 PtrList<volScalarField> fieldSolidHS(solidRegions.size());
+PtrList<volScalarField> corrFieldSolidHS(solidRegions.size());
 PtrList<volScalarField> betavSolid(solidRegions.size());
 PtrList<volSymmTensorField> aniAlphas(solidRegions.size());
+PtrList<scalar> resistivityRho1(solidRegions.size());
+PtrList<scalar> resistivityRho0(solidRegions.size());
+PtrList<scalar> resistivityTref(solidRegions.size());
 
 List<bool> residualReachedSolid(solidRegions.size(), true);
 List<bool> residualControlUsedSolid(solidRegions.size(), false);
@@ -45,6 +49,24 @@ forAll(solidRegions, i)
             ),
             solidRegions[i]
         )
+    );
+
+    corrFieldSolidHS.set
+    (
+	i,
+	new volScalarField
+	(
+	    IOobject
+	    (
+		"corrFieldSolidHS",
+		runTime.timeName(),
+		solidRegions[i],
+		IOobject::NO_READ,
+		IOobject::NO_WRITE
+	    ),
+	    solidRegions[i],
+	    dimensionedScalar("corrFieldSolidHS", dimPower/dimVolume, 0.0)
+	)
     );
 
     if (!thermos[i].isotropic())
@@ -141,4 +163,10 @@ forAll(solidRegions, i)
 
         #include "readSolidMultiRegionResidualControls.H"
     }
+
+    // Read constants from thermophysicalProperties file
+    dictionary subDict = thermos[i].subOrEmptyDict("electricResistivity");
+    resistivityRho1.set(i, new scalar(subDict.lookupOrDefault("rho1", 0.0)));
+    resistivityRho0.set(i, new scalar(subDict.lookupOrDefault("rho0", 1.0)));
+    resistivityTref.set(i, new scalar(subDict.lookupOrDefault("Tref", 1.0)));
 }
