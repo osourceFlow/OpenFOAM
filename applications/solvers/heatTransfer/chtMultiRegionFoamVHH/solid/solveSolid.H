@@ -16,7 +16,7 @@ if (finalIter)
             )
           ==
             fvOptions(rho, h)
-            + fHS //additional heat sources from fHS field
+            + corrFHS //additional heat sources from fHS field
         );
 
         hEqn.relax();
