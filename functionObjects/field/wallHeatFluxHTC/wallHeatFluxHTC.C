@@ -49,12 +49,12 @@ void Foam::functionObjects::wallHeatFluxHTC::writeFileHeader(const label i)
     writeHeader(file(), "Wall heat-flux/htc");
     writeCommented(file(), "Time");
     writeTabbed(file(), "patch");
-    writeTabbed(file(), "q min");
-    writeTabbed(file(), "q max");
-    writeTabbed(file(), "q mean");
-    writeTabbed(file(), "htc min");
-    writeTabbed(file(), "htc max");
-    writeTabbed(file(), "htc mean");
+    writeTabbed(file(), "qmin");
+    writeTabbed(file(), "qmax");
+    writeTabbed(file(), "qmean");
+    writeTabbed(file(), "htcmin");
+    writeTabbed(file(), "htcmax");
+    writeTabbed(file(), "htcmean");
     
     file() << endl;
 }
